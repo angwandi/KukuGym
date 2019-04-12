@@ -10,11 +10,50 @@ using System.Windows.Forms;
 
 namespace KukuGym
 {
-    public partial class Form1 : Form
+    public partial class Welcome : Form
     {
-        public Form1()
+        public Welcome()
         {
             InitializeComponent();
+         
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void setupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void aDMINToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void cOACHToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
+        }
+
+        private void signUpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            SignUp signUp = new SignUp();
+            signUp.Show();
+        }
+
+        private void userToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
