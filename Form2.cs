@@ -27,9 +27,17 @@ namespace KukuGym
 
         private void btnlogin_Click(object sender, EventArgs e)
         {
-            this.Close();
+            String username = textBox1.Text;
+            String password = textBox2.Text;
+            if
+            ("Admin".Equals(username) && "kuku".Equals(password))
+
+            { this.Close();
             Update update = new Update();
-            update.Show();
+            update.Show(); }
+           else
+            Console.WriteLine("Login failed");
+
         }
     }
 }

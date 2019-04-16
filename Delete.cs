@@ -21,5 +21,17 @@ namespace KukuGym
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Update update = new Update();
+            update.Show();
+        }
     }
 }
