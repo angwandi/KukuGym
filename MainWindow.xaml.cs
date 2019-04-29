@@ -18,7 +18,10 @@ namespace kukugym
         {
             //AddUser();
             //AddCoach();
-            AddAdmin();
+            //AddAdmin();
+            addActivity();
+            //loginAdmin();
+            LoadRandomActivity();
             //Console.WriteLine("Hello World");
             InitializeComponent();
         }
@@ -253,8 +256,73 @@ namespace kukugym
             }
 
         }
-        
 
+         private bool addActivity()
+         {
+             var duration = "10min";
+             var name = "Push Ups";
+             var description = "Place all four limbs on the floor in a straightened position, with palms on the floor, an toes on the floor, lift you body up and down continuously.";
+
+             var con = Connect();
+             con.Open();
+             
+             try
+             {
+                 using (var cmd = con.CreateCommand())
+                 {
+                     cmd.CommandText = "INSERT INTO activities (duration, name, description) VALUE (?dur, ?name, ?desc)";
+                     cmd.Parameters.AddWithValue("?dur", duration);
+                     cmd.Parameters.AddWithValue("?name", name);
+                     cmd.Parameters.AddWithValue("?desc", description);
+
+                     if (cmd.ExecuteNonQuery() == 1)
+                     {
+                         return true;
+                     }
+                 }
+             }
+             catch (Exception e)
+             {
+                 MessageBox.Show(e.ToString());
+                 throw;
+             }
+             
+             return false;
+         }
+
+         private void LoadRandomActivity()
+         {
+             var con = Connect();
+               con.Open();
+               try
+               {
+                   using (var cmd = con.CreateCommand())
+                   {
+                       cmd.CommandText = "SELECT * FROM activities ORDER BY RAND() LIMIT 1";
+                       var mySqlDataReader = cmd.ExecuteReader();
+
+                       if (mySqlDataReader.HasRows)//if result is found
+                       {
+                           //log user in
+                           /*//TextBox1.Text =*/ mySqlDataReader.Read();
+                           var duration = mySqlDataReader.GetString(1);
+                           var name = mySqlDataReader.GetString(2);
+                           var description = mySqlDataReader.GetString(3);
+                           MessageBox.Show("Today Exercise duration: " + duration + " Name: " + name + " Description: " + description );
+                       }
+                       else //else
+                       {
+                           //show error
+                       }
+                   }
+               }
+               catch (Exception e)
+               {
+                   MessageBox.Show(e.ToString());
+                   throw;
+               }
+             
+         }
         private void TextBox1_OnContextMenuClosing(object sender, ContextMenuEventArgs e)
         {
             
